@@ -149,14 +149,6 @@ entrenamientoVago jedi = entrenar id' jedi
 robotEntrenamiento :: Jedi
 robotEntrenamiento = UnJedi{rango = Aprendiz, vida = 1000, maestros = [], habilidades = [], midichlorians = 0}
 
+-- Esta funcion la vimos al final para ver como aplicar una funcion que se pasa por parametro
 habilidadCumple :: (Habilidad -> Bool) -> Habilidad -> Bool
 habilidadCumple condicion habilidad = condicion habilidad
-
-leSacaVida :: Habilidad -> Bool
-leSacaVida habilidad = vida robotEntrenamiento - vida (habilidad robotEntrenamiento) < -100
-
-
--- Esta funcion la vimos al final para ver como aplicar una funcion que se pasa por parametro
-cumpleCondicion :: (Habilidad -> Bool) -> Habilidad -> Bool
-cumpleCondicion condicion habilidad = condicion habilidad
-
