@@ -110,7 +110,7 @@ sanar :: Habilidad
 sanar jedi = modificarPorcentualVida 1.25 jedi
 
 darPiruetas :: Number -> Habilidad
-darPiruetas cantidadDePiruetas = reducirMidichlorians (cantidadDePiruetas * 50)
+darPiruetas cantidadDePiruetas = reducirMidichlorians (cantidadDePiruetas * 50) jedi
 
 darPiruetasSkywalker :: Habilidad
 darPiruetasSkywalker jedi = darPiruetas 10 jedi
