@@ -85,3 +85,77 @@ meditacionGrupal batallon = map meditar batallon
 
 potencialTotal :: Batallon -> Number
 potencialTotal batallon = sum(map potencialDeCombate batallon)
+
+{-
+mayorMidichlorians :: Jedi -> Jedi -> Jedi
+mayorMidichlorians jedi1 jedi2 
+    | midichlorians jedi1 > midichlorians jedi2 = jedi1
+    | otherwise = jedi2
+
+mayorPotencialCombate :: Jedi -> Jedi -> Jedi
+mayorPotencialCombate jedi1 jedi2 
+    | potencialDeCombate jedi1 > potencialDeCombate jedi2 = jedi1
+    | otherwise = jedi2
+-}
+--elMejorSegun anakin obiwan potencialDeCombate
+
+--potencialDeCombate::Jedi -> Number
+--midichlorians::Jedi -> Number
+--cantidadMaestros::Jedi -> Number
+
+
+elMejorSegun :: Jedi -> Jedi -> (Jedi -> Number) -> Jedi
+elMejorSegun jedi1 jedi2 criterio
+    | criterio jedi1 > criterio jedi2 = jedi1
+    | otherwise = jedi2
+
+cantidadMaestros::Jedi -> Number
+cantidadMaestros jedi = length (maestros jedi)
+
+entrenamientoTranqui :: Jedi -> Jedi
+entrenamientoTranqui jedi = jedi { midichlorians = sumar100 (midichlorians jedi)}
+
+type TipoEntrenamiento = Number -> Number
+
+
+entrenamientoIntenso :: Jedi -> Jedi
+entrenamientoIntenso jedi = jedi {midichlorians = doble (midichlorians jedi)}
+
+tranqui :: TipoEntrenamiento
+tranqui nro = nro + 100
+
+intenso :: TipoEntrenamiento
+intenso nro = doble nro
+
+vago :: TipoEntrenamiento
+vago nro = nro
+
+malo :: TipoEntrenamiento
+malo nro = nro - 50
+
+entrenamiento :: Jedi -> TipoEntrenamiento -> Jedi
+entrenamiento jedi tipoEntrenamiento = jedi {midichlorians = tipoEntrenamiento (midichlorians jedi)}
+
+
+type Habilidad = Jedi -> Jedi
+
+ataqueBasico :: Habilidad
+ataqueBasico jedi = jedi {resistencia = resistencia jedi * 0.9}
+
+robotEntrenamiento = UnJedi {
+    midichlorians = 0,
+    maestros =[],
+    resistencia = 1000,
+    habilidades = [],
+    vida = 0,
+    rango = Aprendiz
+}
+
+esPeligrosa :: Habilidad -> Bool
+esPeligrosa habilidad = cantidadResistenciaQueLeSaca habilidad > 100
+
+cantidadResistenciaQueLeSaca :: Habilidad -> Number
+cantidadResistenciaQueLeSaca habilidad = resistencia robotEntrenamiento - resistencia (habilidad robotEntrenamiento)
+
+agresivo :: Jedi -> Bool
+agresivo jedi = all esPeligrosa (habilidades jedi)
